@@ -257,6 +257,19 @@ button:disabled {
   border-bottom: 1px solid #ecf2f4;
 }
 
+.profile-link {
+  color: #0e6d97;
+  text-decoration: none;
+  font-weight: 600;
+  word-break: break-word;
+}
+
+.profile-link:hover,
+.profile-link:focus-visible {
+  color: #0a5576;
+  text-decoration: underline;
+}
+
 .result-list li:last-child {
   border-bottom: none;
 }

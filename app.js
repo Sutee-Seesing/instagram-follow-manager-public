@@ -28,6 +28,44 @@ function normalizeUsername(value) {
   return value.trim().toLowerCase();
 }
 
+function getInstagramWebProfileUrl(username) {
+  return `https://www.instagram.com/${encodeURIComponent(username)}/`;
+}
+
+function shouldTryInstagramAppOpen() {
+  const ua = navigator.userAgent || "";
+  const isiPadDesktopMode = navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1;
+  return /Android|iPhone|iPad|iPod/i.test(ua) || isiPadDesktopMode;
+}
+
+function openInstagramProfile(username) {
+  const webUrl = getInstagramWebProfileUrl(username);
+
+  if (!shouldTryInstagramAppOpen()) {
+    window.open(webUrl, "_blank", "noopener,noreferrer");
+    return;
+  }
+
+  const deepLink = `instagram://user?username=${encodeURIComponent(username)}`;
+  let didHidePage = false;
+
+  const onVisibilityChange = () => {
+    if (document.visibilityState === "hidden") {
+      didHidePage = true;
+    }
+  };
+
+  document.addEventListener("visibilitychange", onVisibilityChange);
+  window.location.href = deepLink;
+
+  setTimeout(() => {
+    document.removeEventListener("visibilitychange", onVisibilityChange);
+    if (!didHidePage) {
+      window.location.href = webUrl;
+    }
+  }, 900);
+}
+
 function renderList(items) {
   resultList.innerHTML = "";
 
@@ -41,7 +79,18 @@ function renderList(items) {
 
   for (const username of items) {
     const li = document.createElement("li");
-    li.textContent = username;
+    const profileLink = document.createElement("a");
+    profileLink.className = "profile-link";
+    profileLink.textContent = username;
+    profileLink.href = getInstagramWebProfileUrl(username);
+    profileLink.target = "_blank";
+    profileLink.rel = "noopener noreferrer";
+    profileLink.addEventListener("click", (event) => {
+      event.preventDefault();
+      openInstagramProfile(username);
+    });
+
+    li.appendChild(profileLink);
     resultList.appendChild(li);
   }
 }
