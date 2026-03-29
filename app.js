@@ -7,6 +7,7 @@ const followersCountEl = document.getElementById("followersCount");
 const unfollowersCountEl = document.getElementById("unfollowersCount");
 const resultList = document.getElementById("resultList");
 const searchInput = document.getElementById("searchInput");
+const igOpenHelpEl = document.getElementById("igOpenHelp");
 
 let latestUnfollowers = [];
 
@@ -36,6 +37,36 @@ function shouldTryInstagramAppOpen() {
   const ua = navigator.userAgent || "";
   const isiPadDesktopMode = navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1;
   return /Android|iPhone|iPad|iPod/i.test(ua) || isiPadDesktopMode;
+}
+
+function isIOSOrIPad() {
+  const ua = navigator.userAgent || "";
+  const isiPadDesktopMode = navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1;
+  return /iPhone|iPad|iPod/i.test(ua) || isiPadDesktopMode;
+}
+
+function isInAppBrowser() {
+  const ua = navigator.userAgent || "";
+  return /FBAN|FBAV|Instagram|Line|Twitter|TikTok/i.test(ua);
+}
+
+function updateOpenHelpText() {
+  if (!igOpenHelpEl) {
+    return;
+  }
+
+  if (!isIOSOrIPad()) {
+    igOpenHelpEl.hidden = true;
+    return;
+  }
+
+  if (isInAppBrowser()) {
+    igOpenHelpEl.textContent = "iPhone/iPad: ถ้าไม่เด้งเข้าแอพ IG ให้เปิดหน้านี้ด้วย Safari แล้วกดปุ่ม เปิดในแอพ IG อีกครั้ง";
+  } else {
+    igOpenHelpEl.textContent = "iPhone/iPad: กดปุ่ม เปิดในแอพ IG เพื่อพยายามเปิดแอพโดยตรง หากเปิดไม่ได้ ระบบจะพาไปหน้าเว็บแทน";
+  }
+
+  igOpenHelpEl.hidden = false;
 }
 
 function openInstagramProfile(username) {
@@ -79,6 +110,10 @@ function renderList(items) {
 
   for (const username of items) {
     const li = document.createElement("li");
+
+    const itemActions = document.createElement("div");
+    itemActions.className = "list-actions";
+
     const profileLink = document.createElement("a");
     profileLink.className = "profile-link";
     profileLink.textContent = username;
@@ -90,7 +125,20 @@ function renderList(items) {
       openInstagramProfile(username);
     });
 
-    li.appendChild(profileLink);
+    itemActions.appendChild(profileLink);
+
+    if (shouldTryInstagramAppOpen()) {
+      const openInAppBtn = document.createElement("button");
+      openInAppBtn.type = "button";
+      openInAppBtn.className = "open-app-btn";
+      openInAppBtn.textContent = "เปิดในแอพ IG";
+      openInAppBtn.addEventListener("click", () => {
+        openInstagramProfile(username);
+      });
+      itemActions.appendChild(openInAppBtn);
+    }
+
+    li.appendChild(itemActions);
     resultList.appendChild(li);
   }
 }
@@ -256,4 +304,5 @@ analyzeBtn.addEventListener("click", analyzeZip);
 searchInput.addEventListener("input", filterResults);
 downloadCsvBtn.addEventListener("click", downloadCsv);
 
+updateOpenHelpText();
 renderList([]);

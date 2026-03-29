@@ -239,6 +239,16 @@ button:disabled {
   margin-bottom: 12px;
 }
 
+.results-help {
+  margin: 0 0 10px;
+  border: 1px dashed #9bc7d2;
+  border-radius: 10px;
+  background: #f2fbff;
+  color: #244752;
+  padding: 8px 10px;
+  font-size: 0.94rem;
+}
+
 .result-list {
   list-style: none;
   margin: 0;
@@ -257,6 +267,14 @@ button:disabled {
   border-bottom: 1px solid #ecf2f4;
 }
 
+.list-actions {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
 .profile-link {
   color: #0e6d97;
   text-decoration: none;
@@ -268,6 +286,23 @@ button:disabled {
 .profile-link:focus-visible {
   color: #0a5576;
   text-decoration: underline;
+}
+
+.open-app-btn {
+  border: 1px solid #b9d9e3;
+  border-radius: 999px;
+  padding: 6px 10px;
+  background: #eef8fc;
+  color: #0f5f4e;
+  font-size: 0.86rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.open-app-btn:hover:enabled,
+.open-app-btn:focus-visible {
+  background: #ddf1f9;
+  transform: none;
 }
 
 .result-list li:last-child {
@@ -297,6 +332,15 @@ button:disabled {
   .results-head {
     flex-direction: column;
     align-items: stretch;
+  }
+
+  .list-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .open-app-btn {
+    width: 100%;
   }
 
   .guide-grid {
