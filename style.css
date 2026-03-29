@@ -99,6 +99,47 @@ h2 {
   gap: 12px;
 }
 
+.ig-guide-head p {
+  margin: 8px 0 0;
+  color: var(--muted);
+}
+
+.guide-grid {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.guide-panel {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 12px;
+  background: #f7fcfd;
+}
+
+.guide-panel h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.guide-panel ol {
+  margin: 10px 0 0;
+  padding-left: 20px;
+  display: grid;
+  gap: 6px;
+  color: #35505a;
+}
+
+.guide-note {
+  margin: 12px 0 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px dashed #9bc7d2;
+  background: #f2fbff;
+  color: #244752;
+}
+
 .upload-label {
   font-weight: 700;
 }
@@ -235,5 +276,9 @@ button:disabled {
   .results-head {
     flex-direction: column;
     align-items: stretch;
+  }
+
+  .guide-grid {
+    grid-template-columns: 1fr;
   }
 }
