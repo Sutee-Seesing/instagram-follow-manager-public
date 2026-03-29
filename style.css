@@ -148,6 +148,33 @@ h2 {
   color: #244752;
 }
 
+.faq-section h2 {
+  margin-bottom: 12px;
+}
+
+.faq-list {
+  display: grid;
+  gap: 8px;
+}
+
+.faq-list details {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #f8fcfd;
+  padding: 10px 12px;
+}
+
+.faq-list summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: #22434f;
+}
+
+.faq-list p {
+  margin: 8px 0 0;
+  color: #3c5d67;
+}
+
 .upload-label {
   font-weight: 700;
 }

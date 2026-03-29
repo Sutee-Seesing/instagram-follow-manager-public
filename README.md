@@ -4,6 +4,10 @@
 
 โครงสร้าง repo นี้เป็น public-only และเป็น static website ทั้งหมด (ไม่มี backend)
 
+เว็บไซต์ที่เปิดใช้งานจริง:
+
+https://instagram-follow-manager-public.pages.dev/
+
 ## วิธีใช้งาน
 
 1. เปิด `index.html`
