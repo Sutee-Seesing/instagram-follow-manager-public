@@ -6,7 +6,7 @@
 
 เว็บไซต์ที่เปิดใช้งานจริง:
 
-https://instagram-follow-manager-public.pages.dev/
+https://sutee-seesing.github.io
 
 ## วิธีใช้งาน
 
